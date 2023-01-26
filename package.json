@@ -6,14 +6,6 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/rep-desenv/crud.git"
-  },
   "author": "Diego Portes",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/rep-desenv/crud/issues"
-  },
-  "homepage": "https://github.com/rep-desenv/crud#readme"
+  "license": "ISC"
 }
