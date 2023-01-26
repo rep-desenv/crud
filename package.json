@@ -1,0 +1,19 @@
+{
+  "name": "crud",
+  "version": "1.0.0",
+  "description": "Crud tutorial para apredizado",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rep-desenv/crud.git"
+  },
+  "author": "Diego Portes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rep-desenv/crud/issues"
+  },
+  "homepage": "https://github.com/rep-desenv/crud#readme"
+}
