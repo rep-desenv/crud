@@ -1,0 +1,1 @@
+console.log('O programa está sendo executado!')
