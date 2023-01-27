@@ -12,6 +12,7 @@ module.exports = {
 
         for (let i in carros){
             json.result.push({
+                error: carros[i].error,
                 codigo: carros[i].codigo,
                 modelo: carros[i].modelo,
                 placa: carros[i].placa

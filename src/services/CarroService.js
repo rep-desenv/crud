@@ -6,7 +6,10 @@ module.exports = {
     buscarTodos: ()=>{
         return new Promise((aceito, rejeitar)=>{
             db.query('select * from carros',(error, results)=>{
-                if(error){ rejeitado(error); return;}
+                if(error){ 
+                    rejeitar(error)
+                    return
+                }
                 aceito(results);
             })
         })
