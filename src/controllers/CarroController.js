@@ -20,5 +20,22 @@ module.exports = {
         }
 
         res.json(json)
+    },
+
+    buscarUm: async(req, res) => {
+        let json = {
+            error:'',
+            result:{}
+        }
+
+        let codigo = req.params.codigo  
+
+        let carro = await CarroService.buscarUm(codigo)
+
+        if(carro){
+            json.result = carro
+        }
+
+        res.json(json)
     }
 }
