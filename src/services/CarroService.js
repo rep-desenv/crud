@@ -47,7 +47,7 @@ module.exports = {
 
     inserirJson: (carro)=>{
         return new Promise((aceito, rejeitar)=>{
-            db.query('insert into carros (modelo, placa) values (?,?)',[carro],(error, results)=>{
+            db.query('insert into carros (modelo, placa) values (?,?)',[carro.modelo, carro.placa],(error, results)=>{
                 if(error){
                     rejeitar(error)
                     return

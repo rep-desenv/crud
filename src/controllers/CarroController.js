@@ -1,6 +1,7 @@
 //Todas as regras de negócio deverão estar nesse arquivo
 //const { json } = require('body-parser')
 const CarroService = require('../services/CarroService')
+const clsCarro = require('../../rn/Carros')
 
 module.exports = {
     buscarTodos: async(req, res)=>{
@@ -70,21 +71,20 @@ module.exports = {
             result:{}
         }
 
-        // let modelo = req.body.modelo
-        // let placa = req.body.placa
         let carro = {}
         carro = req.body
+        
+        const objCarro = new clsCarro(carro.placa)
 
-        if(carro.modelo && carro.placa){
+        if((carro.modelo && carro.placa) && objCarro.isPlacaValida()){
             let carroCodigo = CarroService.inserirJson(carro)
             
             json.result={
                 codigo: carroCodigo,
-                modelo,
-                placa
+                carro
             }
         }else{
-            json.error = 'Campos não enviados.'
+            json.error = 'Campos não enviados e/ou placa não pertence ao Rio de Janeiro (K, L ou M).'
         }
 
         res.json(json)
