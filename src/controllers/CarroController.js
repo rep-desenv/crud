@@ -1,5 +1,5 @@
 //Todas as regras de negócio deverão estar nesse arquivo
-const { json } = require('body-parser')
+//const { json } = require('body-parser')
 const CarroService = require('../services/CarroService')
 
 module.exports = {
