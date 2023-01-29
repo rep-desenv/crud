@@ -30,6 +30,31 @@ module.exports = {
                 }
             })
         })
+    },
+
+    inserir: (modelo, placa)=>{
+        return new Promise((aceito, rejeitar)=>{
+            db.query('insert into carros (modelo, placa) values (?,?)',[modelo,placa],(error, results)=>{
+                if(error){
+                    rejeitar(error)
+                    return
+                }
+
+                aceito(true)
+            })
+        })
+    },
+
+    inserirJson: (carro)=>{
+        return new Promise((aceito, rejeitar)=>{
+            db.query('insert into carros (modelo, placa) values (?,?)',[carro],(error, results)=>{
+                if(error){
+                    rejeitar(error)
+                    return
+                }
+                aceito(true)
+            })
+        })
     }
 
 }
