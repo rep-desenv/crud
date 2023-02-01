@@ -44,6 +44,7 @@ module.exports = {
     inserir: async(req, res) => {
         let json = {
             error:'',
+            msg:{},
             result:{}
         }
 
@@ -51,13 +52,16 @@ module.exports = {
         let placa = req.body.placa
 
         if(modelo && placa){
-            let carroCodigo = CarroService.inserir(modelo, placa)
+            let carroCodigo = await CarroService.inserir(modelo, placa)
+
+            json.result = carroCodigo
             
-            json.result={
-                codigo: carroCodigo,
-                modelo,
-                placa
+            if(carroCodigo.affectedRows>0){
+                json.msg = `Registro ${carroCodigo.reg} inserido com sucesso.`
+            }else{
+                json.msg = 'Nenhum registro foi inserido.'
             }
+              
         }else{
             json.error = 'Campos não enviados.'
         }
@@ -68,6 +72,7 @@ module.exports = {
     inserirJson: async(req, res) => {
         let json = {
             error:'',
+            msg:{},
             result:{}
         }
 
@@ -77,16 +82,75 @@ module.exports = {
         const objCarro = new clsCarro(carro.placa)
 
         if((carro.modelo && carro.placa) && objCarro.isPlacaValida()){
-            let carroCodigo = CarroService.inserirJson(carro)
+            let carroCodigo = await CarroService.inserirJson(carro)
+
+            json.result=carroCodigo
             
-            json.result={
-                codigo: carroCodigo,
-                carro
+            if(carroCodigo.affectedRows>0){
+                json.msg = `Registro ${carroCodigo.reg} inserido com sucesso.`
+            }else{
+                json.msg = 'Nenhum registro foi inserido.'
             }
+
         }else{
             json.error = 'Campos não enviados e/ou placa não pertence ao Rio de Janeiro (K, L ou M).'
         }
 
         res.json(json)
+    },
+
+    deletar: async(req, res) => {
+        let json = {
+            error:'',
+            msg:{},
+            result:{}
+        }
+
+       codigo = req.params.codigo
+        
+        if(codigo){
+            let carroCodigo = await CarroService.deletar(codigo)
+            
+            json.result = carroCodigo
+
+            if (carroCodigo.affectedRows>0){
+                json.msg = `Registro ${codigo} deletado com sucesso.`
+            }else{
+                json.msg = 'Nenhum registro foi deletado.'
+            }
+        }else{
+            json.error = 'Registro não encontrado.' + res.error;
+        }
+
+        res.json(json)
+    },
+
+    atualizar: async(req, res)=>{
+        let json = {
+            error:'',
+            msg:{},
+            result:{}
+        }
+
+        let carro = {}
+        carro = req.body
+
+        if(carro.modelo && carro.placa && carro.codigo){
+            let carroAtualizado = await CarroService.atualizar(carro)
+
+            json.result = carroAtualizado
+
+            if (carroAtualizado.affectedRows > 0 ){  
+                json.msg = 'Registro atualizado com sucesso.'                            
+            }else{
+                json.msg = 'Nenhum registro foi atualizado.'                
+            }
+            
+        }else{
+            json.error = 'Campos não enviados.'
+        }
+
+        res.json(json)
     }
+
 }

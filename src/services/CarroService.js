@@ -40,7 +40,16 @@ module.exports = {
                     return
                 }
 
-                aceito(true)
+                let json = {
+                    affectedRows: results.affectedRows,
+                    warningCount: results.warningCount,
+                    message: results.message,
+                    reg:results.insertId,
+                    modelo,
+                    placa
+                }
+
+                aceito(json)
             })
         })
     },
@@ -52,7 +61,56 @@ module.exports = {
                     rejeitar(error)
                     return
                 }
-                aceito(true)
+
+                let json = {
+                    affectedRows: results.affectedRows,
+                    warningCount: results.warningCount,
+                    message: results.message,
+                    reg: results.insertId,
+                    carro
+                }
+
+                aceito(json)
+            })
+        })
+    },
+
+    deletar: (codigo)=>{
+        return new Promise((aceito, rejeitar)=>{
+            db.query('delete from carros where codigo=?',[codigo],(error, results)=>{
+                if(error){ 
+                    rejeitar(error)
+                    return
+                }
+
+                let json = {
+                    affectedRows: results.affectedRows,
+                    warningCount: results.warningCount,
+                    message: results.message,
+                    reg: codigo
+                }
+
+                aceito(json)
+            })
+        })
+    },
+
+    atualizar: (carro)=>{
+        return new Promise((aceito, rejeitar)=>{           
+            db.query('update carros set modelo=?, placa=? where codigo=?',[carro.modelo,carro.placa,carro.codigo],(error, results, fields)=>{
+                if(error){
+                    rejeitar(error)
+                    return
+                }
+
+                let json = {
+                    affectedRows: results.affectedRows,
+                    warningCount: results.warningCount,
+                    message: results.message,
+                    reg: carro
+                }
+
+                aceito(json)
             })
         })
     }
