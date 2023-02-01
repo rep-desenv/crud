@@ -95,9 +95,9 @@ module.exports = {
         })
     },
 
-    atualizar: (carro)=>{
+    atualizar: (codigo, carro)=>{
         return new Promise((aceito, rejeitar)=>{           
-            db.query('update carros set modelo=?, placa=? where codigo=?',[carro.modelo,carro.placa,carro.codigo],(error, results, fields)=>{
+            db.query('update carros set modelo=?, placa=? where codigo=?',[carro.modelo,carro.placa,codigo],(error, results, fields)=>{
                 if(error){
                     rejeitar(error)
                     return

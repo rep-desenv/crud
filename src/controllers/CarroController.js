@@ -135,8 +135,10 @@ module.exports = {
         let carro = {}
         carro = req.body
 
+        codigo = req.params.codigo
+
         if(carro.modelo && carro.placa && carro.codigo){
-            let carroAtualizado = await CarroService.atualizar(carro)
+            let carroAtualizado = await CarroService.atualizar(codigo, carro)
 
             json.result = carroAtualizado
 
