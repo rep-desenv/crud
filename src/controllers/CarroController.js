@@ -1,7 +1,6 @@
 //Todas as regras de negócio deverão estar nesse arquivo
 //const { json } = require('body-parser')
 const CarroService = require('../services/CarroService')
-const clsCarro = require('../../rn/Carros')
 
 module.exports = {
     buscarTodos: async(req, res)=>{
@@ -79,9 +78,7 @@ module.exports = {
         let carro = {}
         carro = req.body
         
-        const objCarro = new clsCarro(carro.placa)
-
-        if((carro.modelo && carro.placa) && objCarro.isPlacaValida()){
+        if(carro.modelo && carro.placa){
             let carroCodigo = await CarroService.inserirJson(carro)
 
             json.result=carroCodigo
@@ -141,9 +138,9 @@ module.exports = {
             let carroAtualizado = await CarroService.atualizar(codigo, carro)
 
             json.result = carroAtualizado
-
+            
             if (carroAtualizado.affectedRows > 0 ){  
-                json.msg = 'Registro atualizado com sucesso.'                            
+            json.msg = `Registro ${codigo} atualizado com sucesso.`                            
             }else{
                 json.msg = 'Nenhum registro foi atualizado.'                
             }

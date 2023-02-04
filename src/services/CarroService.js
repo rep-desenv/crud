@@ -107,7 +107,11 @@ module.exports = {
                     affectedRows: results.affectedRows,
                     warningCount: results.warningCount,
                     message: results.message,
-                    reg: carro
+                    reg: {
+                            codigo: codigo,
+                            modelo: carro.modelo,
+                            placa: carro.placa
+                        }
                 }
 
                 aceito(json)
