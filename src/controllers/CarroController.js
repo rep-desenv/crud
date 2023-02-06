@@ -65,7 +65,7 @@ module.exports = {
             json.error = 'Campos não enviados.'
         }
 
-        res.json(json)
+        res.status(201).json(json)
     },
 
     inserirJson: async(req, res) => {
@@ -93,7 +93,7 @@ module.exports = {
             json.error = 'Campos não enviados e/ou placa não pertence ao Rio de Janeiro (K, L ou M).'
         }
 
-        res.json(json)
+        res.status(201).json(json)
     },
 
     deletar: async(req, res) => {
@@ -119,7 +119,7 @@ module.exports = {
             json.error = 'Registro não encontrado.' + res.error;
         }
 
-        res.json(json)
+        res.status(204).json(json) //Ajustei aqui para ficar aderente ao REST
     },
 
     atualizar: async(req, res)=>{
